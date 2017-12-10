@@ -1,0 +1,8 @@
+{
+  "name": "bamazon",
+  "version": "0.0.1",
+  "dependencies": {
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0"
+  }
+}
