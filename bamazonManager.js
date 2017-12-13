@@ -172,7 +172,7 @@ function addNewProduct() {
             function (err) {
                 if (err) throw err;
                 console.log("Your product was created successfully!");
-                // re-prompt the user for if they want to bid or post
+                setTimeout(prompt, 3000);
             }
         );
     });
