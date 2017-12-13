@@ -24,6 +24,22 @@ Product.prototype.display = function () {
     if (this.id < 10) {
         idSpaceStr += " ";
     }
-    console.log(idSpaceStr + this.id + "    " + this.name + spaceStr + this.showPrice() + "     " + this.stock_quantity);
+    var spaces2 = 5;
+    var spaceStr2 = "";
+    if (this.price < 10) {
+        spaces2 += 5;
+    } else if (this.price < 100) {
+        spaces2 += 4;
+    } else if (this.price < 1000) {
+        spaces2 += 3;
+    } else if (this.price < 10000) {
+        spaces2 += 2;
+    } else {
+        spaces2++;
+    }
+    for (var j = 0; j < spaces2; j++) {
+        spaceStr2 += " ";
+    }
+    console.log(idSpaceStr + this.id + "    " + this.name + spaceStr + this.showPrice() + spaceStr2 + this.stock_quantity);
 };
 module.exports = Product;
