@@ -127,7 +127,55 @@ function updateProduct(product, qtyToAdd) {
 }
 
 function addNewProduct() {
+    if (connection.state === 'disconnected') {
+        connectToDB();
+    }
+    var questions = [
+        {
+            message: "What is the product name?",
+            type: "input",
+            name: "productName"
+        },
+        {
+            message: "What is the product price?",
+            type: "input",
+            name: "productPrice"
+        },
+        {
+            message: "How much quantity for this product?",
+            type: "input",
+            name: "productQuantity"
+        },
+        {
+            message: "Enter Department ID: ",
+            type: "input",
+            name: "departmentID"
+        }
+        ];
+    inquirer.prompt(questions).then(function (answers) {
+        var prodName = answers.productName;
+        var prodPrice = parseFloat(answers.productPrice);
+        var prodQty = parseInt(answers.productQuantity);
+        var deptID = parseInt(answers.departmentID);
 
+        var realPrice = parseInt(prodPrice*100);
+
+        console.log("New product: " + prodName + ", Price: " + realPrice + ", Qty: " + prodQty);
+        connection.query(
+            "INSERT INTO products SET ?",
+            {
+                product_name: prodName,
+                price: realPrice,
+                stock_quantity: prodQty,
+                department_id: deptID
+            },
+            function (err) {
+                if (err) throw err;
+                console.log("Your product was created successfully!");
+                // re-prompt the user for if they want to bid or post
+            }
+        );
+    });
 }
 
 function loadInventory(mainPrompt) {
