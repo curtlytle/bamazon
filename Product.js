@@ -1,6 +1,7 @@
 function Product (id, name, price, stock_quantity) {
     this.id = id;
     this.name = name;
+    this.nameLength = name.length;
     this.price = price;
     this.stock_quantity = stock_quantity;
     this.showPrice = function () {
@@ -14,6 +15,15 @@ function Product (id, name, price, stock_quantity) {
     }
 }
 Product.prototype.display = function () {
-    console.log(this.name + " (" + this.showPrice() + ") -> " + this.id);
+    var spaces = 40 - this.nameLength;
+    var spaceStr = "";
+    for (var i = 0; i < spaces; i++) {
+        spaceStr += " ";
+    }
+    var idSpaceStr = " ";
+    if (this.id < 10) {
+        idSpaceStr += " ";
+    }
+    console.log(idSpaceStr + this.id + "    " + this.name + spaceStr + this.showPrice() + "     " + this.stock_quantity);
 };
 module.exports = Product;

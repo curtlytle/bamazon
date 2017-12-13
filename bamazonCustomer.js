@@ -14,6 +14,7 @@ var connection = mysql.createConnection({
 });
 
 function start() {
+    console.log("Starting Customer buy program...");
     connection.connect(function (err) {
         if (err) throw err;
         loadInventory();
@@ -21,20 +22,26 @@ function start() {
 }
 
 function prompt() {
-    var promptMsg = "Enter id of product to buy... ";
+    var promptMsg = "Enter id of product to buy (Q to quit)... ";
     inquirer.prompt([
         {
             name: "prodid",
             message: promptMsg
         }
     ]).then(function (answer) {
-        var aprodid = parseInt(answer.prodid);
-        product = getProduct(aprodid);
-        if (product == null) {
-            console.log("No product of that id exists!  Sorry!");
+        var input = answer.prodid;
+        if (input === "Q" || input === "q") {
+            console.log("Thank you and Good Bye!");
             connection.end();
         } else {
-            promptHowMany(product);
+            var aprodid = parseInt(input);
+            product = getProduct(aprodid);
+            if (product == null) {
+                console.log("Invalid product id.  Try again.");
+                prompt();
+            } else {
+                promptHowMany(product);
+            }
         }
 
     });
@@ -50,6 +57,7 @@ function promptHowMany(product) {
         var quantityToBuy = parseInt(answer.howMany);
         if (quantityToBuy > product.stock_quantity) {
             console.log("Insufficient quantity!  Sorry, can't place this order.");
+            prompt();
         } else {
             updateProduct(product, quantityToBuy);
         }
@@ -72,7 +80,7 @@ function updateProduct(product, quantReduce) {
             if (err) throw err;
             console.log("Thank you, your order has been placed.");
             console.log(quantReduce + " " + product.name + " for the total price of " + product.calculatePrice(quantReduce));
-            connection.end();
+            setTimeout(loadInventory, 3000);
         }
     );
 }
@@ -80,20 +88,24 @@ function updateProduct(product, quantReduce) {
 function loadInventory() {
     connection.query("SELECT id, product_name, price, stock_quantity FROM products", function (err, res) {
         if (err) throw err;
+        inventory = [];
         for (var i = 0; i < res.length; i++) {
             var id = parseInt(res[i].id);
             var price = parseInt(res[i].price);
             var stock_quantity = parseInt(res[i].stock_quantity);
-            var product = new Product(id, res[i].product_name, price, stock_quantity);
-            inventory.push(product);
+            if (stock_quantity > 0) {
+                var product = new Product(id, res[i].product_name, price, stock_quantity);
+                inventory.push(product);
+            }
         }
-
         printInventory();
         prompt();
     });
 }
 
 function printInventory() {
+    console.log("| ID |             Name                     |   Price   |  Qty  |");
+    console.log("|----|--------------------------------------|-----------|-------|");
     for (var i = 0; i < inventory.length; i++) {
         var product = inventory[i];
         product.display();
