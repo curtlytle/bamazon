@@ -81,6 +81,7 @@ function updateProduct(product, quantReduce) {
             console.log("Thank you, your order has been placed.");
             console.log(quantReduce + " " + product.name + " for the total price of " + product.calculatePrice(quantReduce));
             setTimeout(loadInventory, 3000);
+            console.log(" ");
         }
     );
 }
