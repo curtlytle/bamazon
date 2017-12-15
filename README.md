@@ -6,8 +6,7 @@
 ### Table Structure
 ID    | Product Name  |  Department ID  |    Price       |  Stock Quantity
 ------|---------------|-----------------|----------------|------------------
-INT   |  CHAR(100)    |   INT Key to    | INT - In       |  INT
-      |               | Dept Table      |     pennies    |
+INT | CHAR(100) | INT Key to Dept Table | INT - In pennies |  INT
      
 bamazonCustomer.js selects an id from a list that is printed out, 
 but is coming from the MySQL database.
