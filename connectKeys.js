@@ -1,6 +1,6 @@
 var ConnectKeys = {
-    userName: 'appuser',
-    password: 'goofy1229',
+    userName: 'yourUserName',
+    password: 'yourPassword',
     port: '3306',
     database: 'bamazon',
     host: 'localhost'
