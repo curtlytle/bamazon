@@ -15,6 +15,5 @@ message that they can't make that order.
 ![Image1](/images/Customer1.png)
 ![Image2](/images/Customer2.png)
 ![Image3](/images/Customer3.png)
-![Image4](/images/Customer4.png)
 
 

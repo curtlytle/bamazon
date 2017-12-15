@@ -8,7 +8,7 @@ var ADDINVENTORY = "Add to Inventory";
 var ADDNEWPROD = "Add New Product";
 var QUIT = "Quit...";
 
-var LOWINVENTORY_THRESHOLD = 25;
+var LOWINVENTORY_THRESHOLD = 5;
 
 var inventory = [];
 
