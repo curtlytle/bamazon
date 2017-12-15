@@ -3,10 +3,15 @@
 
 #### Node app that connects to MySQL database
 
-### Table Structure
+### Products Table Structure
 ID    | Product Name  |  Department ID  |    Price       |  Stock Quantity
 ------|---------------|-----------------|----------------|------------------
 INT | CHAR(100) | INT Key to Dept Table | INT - In pennies |  INT
+     
+### Departments Table Structure
+ID    | Department Name  |  Overhead Costs 
+------|------------------|-----------------
+INT | CHAR(100) |  INT - In pennies
      
 bamazonCustomer.js selects an id from a list that is printed out, 
 but is coming from the MySQL database.
