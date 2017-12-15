@@ -1,4 +1,3 @@
-"# bamazon" 
 # Bamazon Customer and Manager
 
 ### Two Node apps that connects to MySQL databases
