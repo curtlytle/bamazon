@@ -1,7 +1,9 @@
 "# bamazon" 
 # Bamazon Customer and Manager
 
-#### Node app that connects to MySQL database
+### Two Node apps that connects to MySQL databases
+#### Customer app picks a product from the list and is able to pick the quantity to buy.  Updates database to reduce quantity of amount bought.
+#### Manager app has choices to view, update and add items.
 
 ### Products Table Structure
 ID    | Product Name  |  Department ID  |    Price       |  Stock Quantity
